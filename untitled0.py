@@ -1,4 +1,6 @@
 import streamlit as st
+pip install openpyxl
+
 import pandas as pd
 
 # Carga la base de datos con el engine correcto
