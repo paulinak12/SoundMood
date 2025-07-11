@@ -96,8 +96,6 @@ else:
             condicion_epoca
         ]
         
-        # Depuración: Verificar si la variable proposito se selecciona correctamente
-        st.write("Proposito seleccionado:", proposito)
 
         # Si se seleccionó un propósito específico, filtrar también por ese propósito
         if proposito:
