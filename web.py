@@ -80,7 +80,7 @@ else:
             ]
 
         # Mostrar la canción recomendada si existe
-        if not resultado.empty:
+    if not resultado.empty:
             cancion = resultado.sample(1).iloc[0]
             
             # Mostrar la información de la canción
