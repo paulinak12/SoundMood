@@ -63,13 +63,21 @@ else:
 
     # Verificamos que se haya hecho una selección válida
     if emocion and duracion_elegida and idioma and epoca:
-        # Filtrar el DataFrame con los criterios seleccionados
-        resultado = df[
-            (df['emocion'].str.lower() == emocion.lower()) &
-            (df['duracion'].str.lower() == duracion_elegida.lower()) &
-            (df['idioma'].str.lower() == idioma.lower()) &
-            ((df['año_exacto'] <= 2010) if epoca == 'hasta 2010' else (df['año_exacto'] >= 2011))
-        ]
+        # Filtrar el DataFrame con los criterios seleccionados, usando la columna "año"
+        if epoca == 'hasta 2010':
+            resultado = df[
+                (df['emocion'].str.lower() == emocion.lower()) &
+                (df['duracion'].str.lower() == duracion_elegida.lower()) &
+                (df['idioma'].str.lower() == idioma.lower()) &
+                (df['año'] <= 2010)  # Usando la columna "año"
+            ]
+        elif epoca == 'desde 2011':
+            resultado = df[
+                (df['emocion'].str.lower() == emocion.lower()) &
+                (df['duracion'].str.lower() == duracion_elegida.lower()) &
+                (df['idioma'].str.lower() == idioma.lower()) &
+                (df['año'] >= 2011)  # Usando la columna "año"
+            ]
 
         # Mostrar la canción recomendada si existe
         if not resultado.empty:
