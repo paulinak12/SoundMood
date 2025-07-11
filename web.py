@@ -60,7 +60,7 @@ else:
         proposito = st.radio("¿Qué buscas en la canción?", 
                              ['Que acompañe lo que siento', 'Que mejore mi estado de ánimo'],
                              index=0)  # Usamos index=0 para que la opción predeterminada sea 'Que acompañe lo que siento'
-
+            proposito = 'acompañar' if int(input("Selecciona una opción: ")) == 1 else 'mejorar'
     # Opciones de duración de la canción
     opciones_duracion = df['duracion'].dropna().unique()
     duracion_elegida = st.selectbox("¿Prefieres una canción corta o larga?", ['Selecciona una opción'] + list(opciones_duracion))
