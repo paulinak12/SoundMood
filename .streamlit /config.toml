@@ -1,11 +1,11 @@
 [theme]
-primaryColor = "#FF9797"
-backgroundColor = "#FFF4F4"
-secondaryBackgroundColor = "#FFCECE"
-textColor = "#2E2F37"
+primaryColor = "#69946F"
+backgroundColor = "#AEC3B0"
+secondaryBackgroundColor = "#EFF6E0"
+textColor = "#2D2D2D"
 
 # This can be one of the following: (tipografías)
 # - "sans-serif"
 # - "serif"
 # - "monospace"
-font = "serif"
+font = "monospace"
