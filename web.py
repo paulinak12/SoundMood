@@ -19,8 +19,8 @@ if pagina_seleccionada == 'Presentación':
     st.markdown("<h1 style='text-align: center;'>SOUNDMOOD</h1>", unsafe_allow_html=True)
     
     texto = """
-    Aquí escribe una presentación creativa sobre ti.
-    ¿Quién eres?, 
+    "Música para el ánimo: recomendaciones personalizadas según tu estado emocional"
+    ¡Hola! Somos Paulina...., Marcela..... y Malena Aldazabal. Queremos darte la bienvenida a nuestra página. A continuación, te presentamos más información sobre el proyecto.
     ¿De dónde eres?, 
     ¿Qué estudias?, 
     ¿Qué te gusta de tu carrera?, 
@@ -81,6 +81,10 @@ else:
                 (df['idioma'].str.lower() == idioma.lower()) &
                 (df['año'] >= 2011)  # Usando la columna "año"
             ]
+
+        # Depuración: Verificar si el resultado tiene datos
+        st.write("Resultado de filtrado:")
+        st.write(resultado)
 
         # Mostrar la canción recomendada si existe
         if not resultado.empty:
