@@ -101,11 +101,9 @@ else:
         if proposito:
             # Filtro por el propósito "Que acompañe lo que siento"
             if proposito == 'Que acompañe lo que siento':
-                st.write("Filtrando por 'acompañar'...")  # Depuración
                 resultado = resultado[resultado['proposito'].str.lower() == 'acompañar']
             # Filtro por el propósito "Que mejore mi estado de ánimo"
             elif proposito == 'Que mejore mi estado de ánimo':
-                st.write("Filtrando por 'mejorar'...")  # Depuración
                 resultado = resultado[resultado['proposito'].str.lower() == 'mejorar']
 
         # Mostrar la canción recomendada si existe
