@@ -7,6 +7,9 @@ from io import BytesIO
 # Cargar el archivo Excel
 df = pd.read_excel('base2.xlsx')
 
+# Asegurarse de que la columna 'año' sea numérica
+df['año'] = pd.to_numeric(df['año'], errors='coerce')  # Convertir 'año' a numérico, ignorando errores
+
 # Crear el menú de páginas en la barra lateral
 paginas = ['Presentación', 'Experiencia']
 pagina_seleccionada = st.sidebar.selectbox('Selecciona una página', paginas)
