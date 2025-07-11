@@ -16,7 +16,8 @@ if pagina_seleccionada == 'Presentación':
     st.markdown("<h1 style='text-align: center;'>SOUNDMOOD</h1>", unsafe_allow_html=True)
     
     texto = """
-    ¡Hola! Somos Paulina Kosaka, Marcela Ismodes y Malena Aldazabal. Queremos darte la bienvenida a nuestra página. A continuación, te presentamos más información sobre el proyecto.<br>**🎧 SoundMood: Tu estado de ánimo tiene sonido¿Qué es SoundMood?**
+    ¡Hola! Somos Paulina Kosaka, Marcela Ismodes y Malena Aldazabal. Queremos darte la bienvenida a nuestra página. A continuación, te presentamos más información sobre el proyecto.
+    <br>**🎧 SoundMood: Tu estado de ánimo tiene sonido¿Qué es SoundMood?**
 
 SoundMood es una página web interactiva que busca conectar la música con las emociones de cada usuario. A través de una interfaz amigable y personalizada, ofrecemos recomendaciones de canciones basadas en el estado de ánimo actual de la persona. 
 
