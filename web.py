@@ -35,10 +35,10 @@ La música siempre ha sido una herramienta poderosa para conectar con las emocio
     
 SoundMood nace para resolver ese problema, ofreciendo una plataforma sencilla pero efectiva que:
     
-    - Comprende lo que sientes
-    - Te recomienda música acorde a ese sentimiento
-    - Te da control total sobre el tipo de música que quieres descubrir
-    - Enriquece tu experiencia al darte contexto e información sobre lo que estás escuchando
+- Comprende lo que sientes
+- Te recomienda música acorde a ese sentimiento
+- Te da control total sobre el tipo de música que quieres descubrir
+- Enriquece tu experiencia al darte contexto e información sobre lo que estás escuchando
     """
     
     st.markdown(f"<div style='text-align: justify; font-size: 15px;'>{texto}</div>", unsafe_allow_html=True)
