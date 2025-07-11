@@ -10,6 +10,9 @@ df = pd.read_excel('base2.xlsx')
 # Asegurarse de que la columna 'año_exacto' sea numérica
 df['año_exacto'] = pd.to_numeric(df['año_exacto'], errors='coerce')  # Convertir 'año_exacto' a numérico, ignorando errores
 
+# Imprimir los valores de la columna 'proposito' para ver si hay algo raro
+st.write("Valores únicos en la columna 'proposito':", df['proposito'].unique())
+
 # Crear el menú de páginas en la barra lateral
 paginas = ['Presentación', 'Encuesta']
 pagina_seleccionada = st.sidebar.selectbox('Selecciona una página', paginas)
@@ -93,6 +96,9 @@ else:
             condicion_epoca
         ]
         
+        # Depuración: Verificar si la variable proposito se selecciona correctamente
+        st.write("Proposito seleccionado:", proposito)
+
         # Si se seleccionó un propósito específico, filtrar también por ese propósito
         if proposito:
             # Filtro por el propósito "Que acompañe lo que siento"
