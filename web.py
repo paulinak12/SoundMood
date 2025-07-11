@@ -101,5 +101,5 @@ else:
             st.write(f"🌐 [Spotify]({cancion['url_spotify']})  |  [Video]({cancion['url_video']})")
     else:
             st.write("No se encontraron canciones para tu selección.")
-    else:
+else:
         st.write("Por favor selecciona todas las opciones para obtener una recomendación.")
