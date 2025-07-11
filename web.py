@@ -95,12 +95,12 @@ else:
         
         # Si se seleccionó un propósito específico, filtrar también por ese propósito
     if proposito:
-        if proposito == 'Que acompañe lo que siento':
-            resultado = resultado[resultado['proposito'].str.lower() == 'acompañar']
-    
-    if proposito:
         if proposito == 'Que mejore mi estado de ánimo':
             resultado = resultado[resultado['proposito'].str.lower() == 'mejorar']
+        elif proposito == 'Que acompañe lo que siento':
+            resultado = resultado[resultado['proposito'].str.lower() == 'acompañar']
+
+
 
 
         # Mostrar la canción recomendada si existe
