@@ -99,7 +99,7 @@ else:
             st.write(f"📝 Letra:\n{cancion['letra_cancion']}")
             st.write(f"ℹ️ Info: {cancion['info_cancion']}")
             st.write(f"🌐 [Spotify]({cancion['url_spotify']})  |  [Video]({cancion['url_video']})")
-        else:
+    else:
             st.write("No se encontraron canciones para tu selección.")
     else:
         st.write("Por favor selecciona todas las opciones para obtener una recomendación.")
