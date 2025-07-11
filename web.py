@@ -97,7 +97,7 @@ else:
         if proposito:
             if proposito == 'Que acompañe lo que siento':
                 resultado = resultado[resultado['proposito'].str.lower() == 'acompañar']
-            else: proposito == 'Que mejore mi estado de ánimo':
+        else: proposito == 'Que mejore mi estado de ánimo':
                 resultado = resultado[resultado['proposito'].str.lower() == 'mejorar']
 
         # Mostrar la canción recomendada si existe
