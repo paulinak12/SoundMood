@@ -13,7 +13,7 @@ pagina_seleccionada = st.sidebar.selectbox('Selecciona una página', paginas)
 
 # Página de Presentación
 if pagina_seleccionada == 'Presentación':
-    st.markdown("<h1 style='text-align: center;'>SOUNDMOOD</h1>", unsafe_allow_html=True)
+    st.markdown("<h1 style='text-align: center;'>Blog evaluación PC4</h1>", unsafe_allow_html=True)
     
     texto = """
     Aquí escribe una presentación creativa sobre ti.
@@ -64,12 +64,20 @@ else:
     # Verificamos que se haya hecho una selección válida
     if emocion and duracion_elegida and idioma and epoca:
         # Filtrar el DataFrame con los criterios seleccionados
-        resultado = df[
-            (df['emocion'].str.lower() == emocion.lower()) &
-            (df['duracion'].str.lower() == duracion_elegida.lower()) &
-            (df['idioma'].str.lower() == idioma.lower()) &
-            ((df['año_exacto'] <= 2010) if epoca == 'hasta 2010' else (df['año_exacto'] >= 2011))
-        ]
+        if epoca == 'hasta 2010':
+            resultado = df[
+                (df['emocion'].str.lower() == emocion.lower()) &
+                (df['duracion'].str.lower() == duracion_elegida.lower()) &
+                (df['idioma'].str.lower() == idioma.lower()) &
+                (df['año_exacto'] <= 2010)
+            ]
+        elif epoca == 'desde 2011':
+            resultado = df[
+                (df['emocion'].str.lower() == emocion.lower()) &
+                (df['duracion'].str.lower() == duracion_elegida.lower()) &
+                (df['idioma'].str.lower() == idioma.lower()) &
+                (df['año_exacto'] >= 2011)
+            ]
 
         # Mostrar la canción recomendada si existe
         if not resultado.empty:
