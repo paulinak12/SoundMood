@@ -10,6 +10,9 @@ df = pd.read_excel('base2.xlsx')
 # Asegurarse de que la columna 'año_exacto' sea numérica
 df['año_exacto'] = pd.to_numeric(df['año_exacto'], errors='coerce')  # Convertir 'año_exacto' a numérico, ignorando errores
 
+# Imprimir los valores de la columna 'proposito' para ver si hay algo raro
+st.write("Valores únicos en la columna 'proposito':", df['proposito'].unique())
+
 # Crear el menú de páginas en la barra lateral
 paginas = ['Presentación', 'Encuesta']
 pagina_seleccionada = st.sidebar.selectbox('Selecciona una página', paginas)
@@ -21,24 +24,24 @@ if pagina_seleccionada == 'Presentación':
     texto = """
     ¡Hola! Somos Paulina Kosaka, Marcela Ismodes y Malena Aldazabal. Queremos darte la bienvenida a nuestra página. A continuación, te presentamos más información sobre el proyecto.
     
-🎧 **SoundMood**: Tu estado de ánimo tiene sonido. ¿Qué es SoundMood?
+    🎧 **SoundMood**: Tu estado de ánimo tiene sonido. ¿Qué es SoundMood?
     
-SoundMood es una página web interactiva que busca conectar la música con las emociones de cada usuario. A través de una interfaz amigable y personalizada, ofrecemos recomendaciones de canciones basadas en el estado de ánimo actual de la persona. 
+    SoundMood es una página web interactiva que busca conectar la música con las emociones de cada usuario. A través de una interfaz amigable y personalizada, ofrecemos recomendaciones de canciones basadas en el estado de ánimo actual de la persona. 
     
-Pero vamos más allá de una simple recomendación musical: personalizamos la experiencia según las preferencias del usuario en cuanto al idioma (español o inglés), la duración de la canción y el año de lanzamiento.
+    Pero vamos más allá de una simple recomendación musical: personalizamos la experiencia según las preferencias del usuario en cuanto al idioma (español o inglés), la duración de la canción y el año de lanzamiento.
     
-Además, para enriquecer la experiencia musical, SoundMood también ofrece información detallada sobre el artista y la canción, permitiendo así que el usuario no solo escuche música, sino que también descubra y aprenda sobre lo que está escuchando.
+    Además, para enriquecer la experiencia musical, SoundMood también ofrece información detallada sobre el artista y la canción, permitiendo así que el usuario no solo escuche música, sino que también descubra y aprenda sobre lo que está escuchando.
     
-__¿Por qué creamos SoundMood?__
+    __¿Por qué creamos SoundMood?__
     
-La música siempre ha sido una herramienta poderosa para conectar con las emociones humanas. Todos hemos buscado canciones cuando estamos tristes, queremos motivarnos o simplemente relajarnos. Sin embargo, no siempre sabemos qué escuchar o no encontramos algo que realmente encaje con cómo nos sentimos.
+    La música siempre ha sido una herramienta poderosa para conectar con las emociones humanas. Todos hemos buscado canciones cuando estamos tristes, queremos motivarnos o simplemente relajarnos. Sin embargo, no siempre sabemos qué escuchar o no encontramos algo que realmente encaje con cómo nos sentimos.
     
-SoundMood nace para resolver ese problema, ofreciendo una plataforma sencilla pero efectiva que:
+    SoundMood nace para resolver ese problema, ofreciendo una plataforma sencilla pero efectiva que:
     
- - Comprende lo que sientes
- - Te recomienda música acorde a ese sentimiento
- - Te da control total sobre el tipo de música que quieres descubrir
- - Enriquece tu experiencia al darte contexto e información sobre lo que estás escuchando
+    - Comprende lo que sientes
+    - Te recomienda música acorde a ese sentimiento
+    - Te da control total sobre el tipo de música que quieres descubrir
+    - Enriquece tu experiencia al darte contexto e información sobre lo que estás escuchando
     """
     
     st.markdown(f"<div style='text-align: justify; font-size: 15px;'>{texto}</div>", unsafe_allow_html=True)
@@ -93,11 +96,18 @@ else:
             condicion_epoca
         ]
         
+        # Depuración: Verificar si la variable proposito se selecciona correctamente
+        st.write("Proposito seleccionado:", proposito)
+
         # Si se seleccionó un propósito específico, filtrar también por ese propósito
         if proposito:
+            # Filtro por el propósito "Que acompañe lo que siento"
             if proposito == 'Que acompañe lo que siento':
+                st.write("Filtrando por 'acompañar'...")  # Depuración
                 resultado = resultado[resultado['proposito'].str.lower() == 'acompañar']
+            # Filtro por el propósito "Que mejore mi estado de ánimo"
             elif proposito == 'Que mejore mi estado de ánimo':
+                st.write("Filtrando por 'mejorar'...")  # Depuración
                 resultado = resultado[resultado['proposito'].str.lower() == 'mejorar']
 
         # Mostrar la canción recomendada si existe
