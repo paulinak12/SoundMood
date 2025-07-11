@@ -7,9 +7,6 @@ from io import BytesIO
 # Cargar el archivo Excel
 df = pd.read_excel('base2.xlsx')
 
-# Asegurarse de que la columna 'año' sea numérica
-df['año'] = pd.to_numeric(df['año'], errors='coerce')  # Convertir 'año' a numérico, ignorando errores
-
 # Crear el menú de páginas en la barra lateral
 paginas = ['Presentación', 'Experiencia']
 pagina_seleccionada = st.sidebar.selectbox('Selecciona una página', paginas)
@@ -19,9 +16,13 @@ if pagina_seleccionada == 'Presentación':
     st.markdown("<h1 style='text-align: center;'>SOUNDMOOD</h1>", unsafe_allow_html=True)
     
     texto = """
-    "Música para el ánimo: recomendaciones personalizadas según tu estado emocional"
-    
-¡Hola! Somos Paulina Kosaka, Marcela Ismodes y Malena Aldazabal. Queremos darte la bienvenida a nuestra página. A continuación, te presentamos más información sobre el proyecto.
+    Aquí escribe una presentación creativa sobre ti.
+    ¿Quién eres?, 
+    ¿De dónde eres?, 
+    ¿Qué estudias?, 
+    ¿Qué te gusta de tu carrera?, 
+    ¿Qué te gustaría hacer en el futuro?, 
+    ¿Qué te gusta hacer en tu tiempo libre?
     """
     
     st.markdown(f"<div style='text-align: justify; font-size: 15px;'>{texto}</div>", unsafe_allow_html=True)
@@ -62,25 +63,13 @@ else:
 
     # Verificamos que se haya hecho una selección válida
     if emocion and duracion_elegida and idioma and epoca:
-        # Filtrar el DataFrame con los criterios seleccionados, usando la columna "año"
-        if epoca == 'hasta 2010':
-            resultado = df[
-                (df['emocion'].str.lower() == emocion.lower()) &
-                (df['duracion'].str.lower() == duracion_elegida.lower()) &
-                (df['idioma'].str.lower() == idioma.lower()) &
-                (df['año'] <= 2010)  # Usando la columna "año"
-            ]
-        elif epoca == 'desde 2011':
-            resultado = df[
-                (df['emocion'].str.lower() == emocion.lower()) &
-                (df['duracion'].str.lower() == duracion_elegida.lower()) &
-                (df['idioma'].str.lower() == idioma.lower()) &
-                (df['año'] >= 2011)  # Usando la columna "año"
-            ]
-
-        # Depuración: Verificar si el resultado tiene datos
-        st.write("Resultado de filtrado:")
-        st.write(resultado)
+        # Filtrar el DataFrame con los criterios seleccionados
+        resultado = df[
+            (df['emocion'].str.lower() == emocion.lower()) &
+            (df['duracion'].str.lower() == duracion_elegida.lower()) &
+            (df['idioma'].str.lower() == idioma.lower()) &
+            ((df['año_exacto'] <= 2010) if epoca == 'hasta 2010' else (df['año_exacto'] >= 2011))
+        ]
 
         # Mostrar la canción recomendada si existe
         if not resultado.empty:
@@ -100,7 +89,7 @@ else:
             # Mostrar más detalles
             st.write(f"📲 Red Social: {cancion['red_social']} ({cancion['link_red_social']})")
             st.write(f"📝 Letra:\n{cancion['letra_cancion']}")
-            st.write(f"ℹ️ Info: {cancion['info_cancion']}")
+            st.write(f"ℹ Info: {cancion['info_cancion']}")
             st.write(f"🌐 [Spotify]({cancion['url_spotify']})  |  [Video]({cancion['url_video']})")
         else:
             st.write("No se encontraron canciones para tu selección.")
