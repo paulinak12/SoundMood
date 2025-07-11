@@ -20,23 +20,25 @@ if pagina_seleccionada == 'Presentación':
     
     texto = """
     ¡Hola! Somos Paulina Kosaka, Marcela Ismodes y Malena Aldazabal. Queremos darte la bienvenida a nuestra página. A continuación, te presentamos más información sobre el proyecto.
-    </p><p>\n 🎧SoundMood: Tu estado de ánimo tiene sonido¿Qué es SoundMood?
-
-SoundMood es una página web interactiva que busca conectar la música con las emociones de cada usuario. A través de una interfaz amigable y personalizada, ofrecemos recomendaciones de canciones basadas en el estado de ánimo actual de la persona. 
-
-Pero vamos más allá de una simple recomendación musical: personalizamos la experiencia según las preferencias del usuario en cuanto al idioma (español o inglés), la duración de la canción y el año de lanzamiento.
-    Además, para enriquecer la experiencia musical, SoundMood también ofrece información detallada sobre el artista y la canción, permitiendo así que el usuario no solo escuche música, sino que también descubra y aprenda sobre lo que está escuchando.
     
-    \n__¿Por qué creamos SoundMood?__
+    🎧 **SoundMood**: Tu estado de ánimo tiene sonido. ¿Qué es SoundMood?
     
-La música siempre ha sido una herramienta poderosa para conectar con las emociones humanas. Todos hemos buscado canciones cuando estamos tristes, queremos motivarnos o simplemente relajarnos. Sin embargo, no siempre sabemos qué escuchar o no encontramos algo que realmente encaje con cómo nos sentimos.
-
-__SoundMood nace para resolver ese problema, ofreciendo una plataforma sencilla pero efectiva que:__
-
-\nComprende lo que sientes
-\nTe recomienda música acorde a ese sentimiento
-\nTe da control total sobre el tipo de música que quieres descubrir
-\nEnriquece tu experiencia al darte contexto e información sobre lo que estás escuchando
+    SoundMood es una página web interactiva que busca conectar la música con las emociones de cada usuario. A través de una interfaz amigable y personalizada, ofrecemos recomendaciones de canciones basadas en el estado de ánimo actual de la persona. 
+    
+    Pero vamos más allá de una simple recomendación musical: personalizamos la experiencia según las preferencias del usuario en cuanto al idioma (español o inglés), la duración de la canción y el año de lanzamiento.
+    
+    Además, para enriquecer la experiencia musical, SoundMood también ofrece información detallada sobre el artista y la canción, permitiendo así que el usuario no solo escuche música, sino que también descubra y aprenda sobre lo que está escuchando.
+    
+    __¿Por qué creamos SoundMood?__
+    
+    La música siempre ha sido una herramienta poderosa para conectar con las emociones humanas. Todos hemos buscado canciones cuando estamos tristes, queremos motivarnos o simplemente relajarnos. Sin embargo, no siempre sabemos qué escuchar o no encontramos algo que realmente encaje con cómo nos sentimos.
+    
+    SoundMood nace para resolver ese problema, ofreciendo una plataforma sencilla pero efectiva que:
+    
+    - Comprende lo que sientes
+    - Te recomienda música acorde a ese sentimiento
+    - Te da control total sobre el tipo de música que quieres descubrir
+    - Enriquece tu experiencia al darte contexto e información sobre lo que estás escuchando
     """
     
     st.markdown(f"<div style='text-align: justify; font-size: 15px;'>{texto}</div>", unsafe_allow_html=True)
@@ -77,10 +79,10 @@ else:
 
     # Verificamos que se haya hecho una selección válida
     if emocion and duracion_elegida and idioma and epoca:
-        # Filtrar el DataFrame con los criterios seleccionados, usando la columna "año_exacto"
-        if epoca == 'hasta 2010':
+        # Definir el filtro de época basado en la selección
+        if epoca.lower() == 'hasta 2010':
             condicion_epoca = df['año_exacto'] <= 2010
-        elif epoca == 'desde 2011':
+        else:
             condicion_epoca = df['año_exacto'] >= 2011
 
         # Filtrar el DataFrame con los criterios seleccionados
@@ -115,4 +117,3 @@ else:
             st.write("No se encontraron canciones para tu selección.")
     else:
         st.write("Por favor selecciona todas las opciones para obtener una recomendación.")
-
