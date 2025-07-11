@@ -8,7 +8,7 @@ from io import BytesIO
 df = pd.read_excel('base2.xlsx')
 
 # Crear el menú de páginas en la barra lateral
-paginas = ['Presentación', 'Experiencia']
+paginas = ['Presentación', 'Encuesta']
 pagina_seleccionada = st.sidebar.selectbox('Selecciona una página', paginas)
 
 # Página de Presentación
@@ -16,13 +16,11 @@ if pagina_seleccionada == 'Presentación':
     st.markdown("<h1 style='text-align: center;'>SOUNDMOOD</h1>", unsafe_allow_html=True)
     
     texto = """
-    Aquí escribe una presentación creativa sobre ti.
-    ¿Quién eres?, 
-    ¿De dónde eres?, 
-    ¿Qué estudias?, 
-    ¿Qué te gusta de tu carrera?, 
-    ¿Qué te gustaría hacer en el futuro?, 
-    ¿Qué te gusta hacer en tu tiempo libre?
+    ¡Hola! Somos Paulina Kosaka, Marcela Ismodes y Malena Aldazabal. Queremos darte la bienvenida a nuestra página. A continuación, te presentamos más información sobre el proyecto.
+🎧 SoundMood: Tu estado de ánimo tiene sonido¿Qué es SoundMood?
+SoundMood es una página web interactiva que busca conectar la música con las emociones de cada usuario. A través de una interfaz amigable y personalizada, ofrecemos recomendaciones de canciones basadas en el estado de ánimo actual de la persona. Pero vamos más allá de una simple recomendación musical: personalizamos la experiencia según las preferencias del usuario en cuanto al idioma (español o inglés), la duración de la canción y el año de lanzamiento.
+
+Además, para enriquecer la experiencia musical, SoundMood también ofrece información detallada sobre el artista y la canción, permitiendo así que el usuario no solo escuche música, sino que también descubra y aprenda sobre lo que está escuchando.
     """
     
     st.markdown(f"<div style='text-align: justify; font-size: 15px;'>{texto}</div>", unsafe_allow_html=True)
