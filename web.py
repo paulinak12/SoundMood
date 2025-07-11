@@ -7,6 +7,9 @@ from io import BytesIO
 # Cargar el archivo Excel
 df = pd.read_excel('base2.xlsx')
 
+# Asegurarse de que la columna 'año_exacto' sea numérica
+df['año_exacto'] = pd.to_numeric(df['año_exacto'], errors='coerce')  # Convertir 'año_exacto' a numérico, ignorando errores
+
 # Crear el menú de páginas en la barra lateral
 paginas = ['Presentación', 'Encuesta']
 pagina_seleccionada = st.sidebar.selectbox('Selecciona una página', paginas)
@@ -38,7 +41,7 @@ __SoundMood nace para resolver ese problema, ofreciendo una plataforma sencilla 
     
     st.markdown(f"<div style='text-align: justify; font-size: 15px;'>{texto}</div>", unsafe_allow_html=True)
 
-# Página de Experiencia
+# Página de Encuesta
 else: 
     # Selección de emociones con la opción "Selecciona una opción"
     emociones = ['Selecciona una opción', 'alegre', 'triste', 'relajado', 'romántico', 'divertido', 'motivado', 'estresado/ansioso', 'molesto']
@@ -74,17 +77,18 @@ else:
 
     # Verificamos que se haya hecho una selección válida
     if emocion and duracion_elegida and idioma and epoca:
-        if epoca.lower() == 'hasta 2010':
+        # Filtrar el DataFrame con los criterios seleccionados, usando la columna "año_exacto"
+        if epoca == 'hasta 2010':
             condicion_epoca = df['año_exacto'] <= 2010
-        else:
+        elif epoca == 'desde 2011':
             condicion_epoca = df['año_exacto'] >= 2011
+
         # Filtrar el DataFrame con los criterios seleccionados
         resultado = df[
             (df['emocion'].str.lower() == emocion.lower()) &
             (df['duracion'].str.lower() == duracion_elegida.lower()) &
             (df['idioma'].str.lower() == idioma.lower()) &
-             condicion_epoca
-        #((df['año_exacto'].int() <= 2010) if epoca == 'hasta 2010' else (df['año_exacto'].int() >= 2011))
+            condicion_epoca
         ]
 
         # Mostrar la canción recomendada si existe
@@ -105,9 +109,10 @@ else:
             # Mostrar más detalles
             st.write(f"📲 Red Social: {cancion['red_social']} ({cancion['link_red_social']})")
             st.write(f"📝 Letra:\n{cancion['letra_cancion']}")
-            st.write(f"ℹ Info: {cancion['info_cancion']}")
+            st.write(f"ℹ️ Info: {cancion['info_cancion']}")
             st.write(f"🌐 [Spotify]({cancion['url_spotify']})  |  [Video]({cancion['url_video']})")
         else:
             st.write("No se encontraron canciones para tu selección.")
     else:
         st.write("Por favor selecciona todas las opciones para obtener una recomendación.")
+
