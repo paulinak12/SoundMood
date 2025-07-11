@@ -23,15 +23,10 @@ if pagina_seleccionada == 'Presentación':
     Además, para enriquecer la experiencia musical, SoundMood también ofrece información detallada sobre el artista y la canción, permitiendo así que el usuario no solo escuche música, sino que también descubra y aprenda sobre lo que está escuchando.
     ¿Por qué creamos SoundMood?
     La música siempre ha sido una herramienta poderosa para conectar con las emociones humanas. Todos hemos buscado canciones cuando estamos tristes, queremos motivarnos o simplemente relajarnos. Sin embargo, no siempre sabemos qué escuchar o no encontramos algo que realmente encaje con cómo nos sentimos.
-    
     SoundMood nace para resolver ese problema, ofreciendo una plataforma sencilla pero efectiva que:
-    
     Comprende lo que sientes
-    
     Te recomienda música acorde a ese sentimiento
-    
     Te da control total sobre el tipo de música que quieres descubrir
-    
     Enriquece tu experiencia al darte contexto e información sobre lo que estás escuchando
     """
     
