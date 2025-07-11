@@ -81,12 +81,6 @@ else:
 
     # Verificamos que se haya hecho una selección válida
     if emocion and duracion_elegida and idioma and epoca:
-        # Definir el filtro de época basado en la selección
-        if epoca.lower() == 'hasta 2010':
-            condicion_epoca = df['año_exacto'] <= 2010
-        else:
-            condicion_epoca = df['año_exacto'] >= 2011
-
         # Mapeo de emociones para "Que mejore mi estado de ánimo"
         if proposito == 'Que mejore mi estado de ánimo':
             if emocion == 'triste':
@@ -95,6 +89,15 @@ else:
                 emocion = 'relajado'  # Si está estresado, mostrar canciones relajantes
             elif emocion == 'molesto':
                 emocion = 'divertido'  # Si está molesto, mostrar canciones divertidas
+        
+        # Depuración: Verificar la emoción filtrada
+        st.write("Emoción filtrada para la recomendación:", emocion)
+        
+        # Definir el filtro de época basado en la selección
+        if epoca.lower() == 'hasta 2010':
+            condicion_epoca = df['año_exacto'] <= 2010
+        else:
+            condicion_epoca = df['año_exacto'] >= 2011
 
         # Filtrar el DataFrame con los criterios seleccionados
         resultado = df[
