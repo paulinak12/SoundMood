@@ -20,7 +20,8 @@ if pagina_seleccionada == 'Presentación':
     
     texto = """
     "Música para el ánimo: recomendaciones personalizadas según tu estado emocional"
-    ¡Hola! Somos Paulina...., Marcela..... y Malena Aldazabal. Queremos darte la bienvenida a nuestra página. A continuación, te presentamos más información sobre el proyecto.
+    
+    ¡Hola! Somos Paulina Kosaka, Marcela Ismodes y Malena Aldazabal. Queremos darte la bienvenida a nuestra página. A continuación, te presentamos más información sobre el proyecto.
     ¿De dónde eres?, 
     ¿Qué estudias?, 
     ¿Qué te gusta de tu carrera?, 
