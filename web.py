@@ -19,7 +19,7 @@ if pagina_seleccionada == 'Presentación':
     st.markdown("<h1 style='text-align: center;'>SOUNDMOOD</h1>", unsafe_allow_html=True)
     
     texto = """
-    "                          Música para el ánimo: recomendaciones personalizadas según tu estado emocional"
+    "Música para el ánimo: recomendaciones personalizadas según tu estado emocional"
     
 ¡Hola! Somos Paulina Kosaka, Marcela Ismodes y Malena Aldazabal. Queremos darte la bienvenida a nuestra página. A continuación, te presentamos más información sobre el proyecto.
     """
