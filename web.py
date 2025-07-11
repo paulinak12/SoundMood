@@ -77,7 +77,7 @@ else:
     if epoca == 'Selecciona una opción':
         epoca = None
 
-        if proposito:
+    if proposito:
         if proposito == 'Que acompañe lo que siento':
             resultado = resultado[resultado['proposito'].str.lower() == 'acompañar']
         elif proposito == 'Que mejore mi estado de ánimo':
