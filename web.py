@@ -58,11 +58,6 @@ else:
     if emocion in ['triste', 'estresado/ansioso', 'molesto']:
         proposito = st.radio("¿Qué buscas en la canción?", ['Que acompañe lo que siento', 'Que mejore mi estado de ánimo'])
         
-    if proposito:
-        if proposito == 'Que acompañe lo que siento':
-            resultado = resultado[resultado['proposito'].str.lower() == 'acompañar']
-        elif proposito == 'Que mejore mi estado de ánimo':
-            resultado = resultado[resultado['proposito'].str.lower() == 'mejorar']
     # Opciones de duración de la canción
     opciones_duracion = df['duracion'].dropna().unique()
     duracion_elegida = st.selectbox("¿Prefieres una canción corta o larga?", ['Selecciona una opción'] + list(opciones_duracion))
@@ -82,6 +77,11 @@ else:
     if epoca == 'Selecciona una opción':
         epoca = None
 
+        if proposito:
+        if proposito == 'Que acompañe lo que siento':
+            resultado = resultado[resultado['proposito'].str.lower() == 'acompañar']
+        elif proposito == 'Que mejore mi estado de ánimo':
+            resultado = resultado[resultado['proposito'].str.lower() == 'mejorar']
     # Verificamos que se haya hecho una selección válida
     if emocion and duracion_elegida and idioma and epoca:
         # Definir el filtro de época basado en la selección
