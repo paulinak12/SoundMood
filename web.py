@@ -137,5 +137,4 @@ else:
             st.write("No se encontraron canciones para tu selección.")
     else:
         st.write("Por favor selecciona todas las opciones para obtener una recomendación.")
-else:
-        st.write("Por favor selecciona todas las opciones para obtener una recomendación.")
+
