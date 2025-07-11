@@ -68,7 +68,7 @@ else:
             (df['emocion'].str.lower() == emocion.lower()) &
             (df['duracion'].str.lower() == duracion_elegida.lower()) &
             (df['idioma'].str.lower() == idioma.lower()) &
-            ((df['año_exacto'] <= 2010) if epoca == 'hasta 2010' else (df['año_exacto'] >= 2011))
+            ((df['año_exacto'].int() <= 2010) if epoca == 'hasta 2010' else (df['año_exacto'].int() >= 2011))
         ]
 
         # Mostrar la canción recomendada si existe
