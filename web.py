@@ -56,7 +56,9 @@ else:
     # Propósito de la canción solo para emociones específicas (triste, estresado/ansioso, molesto)
     proposito = ''
     if emocion in ['triste', 'estresado/ansioso', 'molesto']:
-        proposito = st.radio("¿Qué buscas en la canción?", ['Que acompañe lo que siento', 'Que mejore mi estado de ánimo'])
+        proposito = st.radio("¿Qué buscas en la canción?", 
+                             ['Que acompañe lo que siento', 'Que mejore mi estado de ánimo'],
+                             index=0)  # Usamos el parámetro index=0 para que la opción predeterminada sea 'Que acompañe lo que siento'
 
     # Opciones de duración de la canción
     opciones_duracion = df['duracion'].dropna().unique()
@@ -95,8 +97,10 @@ else:
         
         # Si se seleccionó un propósito específico, filtrar también por ese propósito
         if proposito:
+            # Filtro por el propósito "Que acompañe lo que siento"
             if proposito == 'Que acompañe lo que siento':
                 resultado = resultado[resultado['proposito'].str.lower() == 'acompañar']
+            # Filtro por el propósito "Que mejore mi estado de ánimo"
             elif proposito == 'Que mejore mi estado de ánimo':
                 resultado = resultado[resultado['proposito'].str.lower() == 'mejorar']
 
