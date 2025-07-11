@@ -94,8 +94,8 @@ else:
         ]
         
         # Si se seleccionó un propósito específico, filtrar también por ese propósito
-        if proposito:
-            if proposito == 'Que acompañe lo que siento':
+    if proposito:
+        if proposito == 'Que acompañe lo que siento':
                 resultado = resultado[resultado['proposito'].str.lower() == 'acompañar']
         elif: proposito == 'Que mejore mi estado de ánimo':
                 resultado = resultado[resultado['proposito'].str.lower() == 'mejorar']
