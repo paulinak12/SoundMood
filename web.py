@@ -7,7 +7,7 @@ df = pd.read_excel('base2.xlsx')
 paginas = ['Presentación', 'Experiencia']
 pagina_seleccionada = st.sidebar.selectbox('Selecciona una página', paginas)
 if pagina_seleccionada == 'Presentación':
-    st.markdown("<h1 style='text-align: center;'>Blog evaluación PC4</h1>", unsafe_allow_html=True)
+    st.markdown("<h1 style='text-align: center;'>SoundMood</h1>", unsafe_allow_html=True)
     texto = """
     Aquí escribe una presentación creativa sobre ti.
     ¿Quién eres?, 
