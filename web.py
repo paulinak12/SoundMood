@@ -80,7 +80,7 @@ else:
             ]
 
         # Mostrar la canción recomendada si existe
-    if not resultado.empty:
+        if not resultado.empty:
             cancion = resultado.sample(1).iloc[0]
             
             # Mostrar la información de la canción
@@ -99,7 +99,7 @@ else:
             st.write(f"📝 Letra:\n{cancion['letra_cancion']}")
             st.write(f"ℹ️ Info: {cancion['info_cancion']}")
             st.write(f"🌐 [Spotify]({cancion['url_spotify']})  |  [Video]({cancion['url_video']})")
-    else:
+        else:
             st.write("No se encontraron canciones para tu selección.")
-else:
+    else:
         st.write("Por favor selecciona todas las opciones para obtener una recomendación.")
