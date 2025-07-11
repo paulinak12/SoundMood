@@ -17,6 +17,7 @@ if pagina_seleccionada == 'Presentación':
     
     texto = """
     ¡Hola! Somos Paulina Kosaka, Marcela Ismodes y Malena Aldazabal. Queremos darte la bienvenida a nuestra página. A continuación, te presentamos más información sobre el proyecto.
+
     
 🎧 SoundMood: Tu estado de ánimo tiene sonido¿Qué es SoundMood?
 
