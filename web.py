@@ -56,11 +56,10 @@ else:
     # Propósito de la canción solo para emociones específicas (triste, estresado/ansioso, molesto)
     proposito = ''
     if emocion in ['triste', 'estresado/ansioso', 'molesto']:
-        # Aquí utilizamos un radio button para seleccionar el propósito de la canción
         proposito = st.radio("¿Qué buscas en la canción?", 
                              ['Que acompañe lo que siento', 'Que mejore mi estado de ánimo'],
                              index=0)  # Usamos index=0 para que la opción predeterminada sea 'Que acompañe lo que siento'
-            proposito = 'acompañar' if int(input("Selecciona una opción: ")) == 1 else 'mejorar'
+
     # Opciones de duración de la canción
     opciones_duracion = df['duracion'].dropna().unique()
     duracion_elegida = st.selectbox("¿Prefieres una canción corta o larga?", ['Selecciona una opción'] + list(opciones_duracion))
@@ -82,6 +81,15 @@ else:
 
     # Verificamos que se haya hecho una selección válida
     if emocion and duracion_elegida and idioma and epoca:
+        # Mapeo de emociones para "Que mejore mi estado de ánimo"
+        if proposito == 'Que mejore mi estado de ánimo':
+            if emocion == 'triste':
+                emocion = 'alegre'  # Si está triste, mostrar canciones alegres
+            elif emocion == 'estresado/ansioso':
+                emocion = 'relajado'  # Si está estresado, mostrar canciones relajantes
+            elif emocion == 'molesto':
+                emocion = 'relajado'  # Si está molesto, mostrar canciones relajantes
+
         # Definir el filtro de época basado en la selección
         if epoca.lower() == 'hasta 2010':
             condicion_epoca = df['año_exacto'] <= 2010
@@ -98,8 +106,10 @@ else:
         
         # Si se seleccionó un propósito específico, filtrar también por ese propósito
         if proposito:
+            # Filtro por el propósito "Que acompañe lo que siento"
             if proposito == 'Que acompañe lo que siento':
                 resultado = resultado[resultado['proposito'].str.lower() == 'acompañar']
+            # Filtro por el propósito "Que mejore mi estado de ánimo"
             elif proposito == 'Que mejore mi estado de ánimo':
                 resultado = resultado[resultado['proposito'].str.lower() == 'mejorar']
 
@@ -125,5 +135,8 @@ else:
             st.write(f"🌐 [Spotify]({cancion['url_spotify']})  |  [Video]({cancion['url_video']})")
         else:
             st.write("No se encontraron canciones para tu selección.")
+    else:
+        st.write("Por favor selecciona todas las opciones para obtener una recomendación.")
+
     else:
         st.write("Por favor selecciona todas las opciones para obtener una recomendación.")
