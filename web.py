@@ -142,7 +142,7 @@ else:
 
             # Mostrar más detalles
             st.write(f"ℹ️ Info: {cancion['info_cancion']}")
-            st.write(f"🌐 Escuchála y mira el video oficial en: [Spotify]({cancion['url_spotify']})  |  [Video]({cancion['url_video']})")
+            st.write(f"🌐 Escúchala y mira el video oficial en: [Spotify]({cancion['url_spotify']})  |  [Video]({cancion['url_video']})")
             st.write("📝 Letra:")
             # Mostrar la letra de la canción tal como está, respetando saltos de línea y espacios
             st.text(cancion['letra_cancion'])
