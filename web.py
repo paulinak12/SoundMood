@@ -121,9 +121,22 @@ else:
             st.write(f"🎸 Género: {cancion['genero']}")
 
             # Mostrar imagen del artista si está disponible
+            # Obtener la URL de la imagen del artista desde la base de datos
             foto = cancion['foto_artista']
+
+            # Verificar que el valor en 'foto_artista' sea una cadena (str) y que termine en .jpg o .png
             if isinstance(foto, str) and (foto.lower().endswith('.jpg') or foto.lower().endswith('.png')):
-              st.image(foto, caption=f"Imagen de {cancion['nombre_artista']}", width=200)
+    
+            # Usar HTML incrustado para centrar la imagen y mostrar un texto debajo (caption)
+                st.markdown(
+                    f"""
+                    <div style="text-align: center;">  <!-- Centra todo el contenido dentro del div -->
+                        <img src="{foto}" alt="Imagen de {cancion['nombre_artista']}" width="200" style="border-radius: 10px;"> <!-- Muestra la imagen con ancho reducido y bordes redondeados -->
+                        <p style="font-size: 14px; color: #555;">Imagen de {cancion['nombre_artista']}</p> <!-- Texto debajo de la imagen, en gris claro -->
+                    </div>
+                    """,
+                    unsafe_allow_html=True  # Permite renderizar HTML dentro de Streamlit
+                )
 
             # Mostrar más detalles
             st.write(f"📲 Red Social: {cancion['red_social']} ({cancion['link_red_social']})")
