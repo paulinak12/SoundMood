@@ -93,7 +93,7 @@ else:
             condicion_epoca
         ]
 
-        # Si es emoción negativa, filtramos por propósito (esto lo discutimos en grupo)
+        # Si es emoción negativa, filtramos por propósito 
         if emocion.lower() in ['triste', 'estresado/ansioso', 'molesto']:
             resultado['proposito'] = resultado['proposito'].str.lower().str.strip()
             if proposito == 'Que acompañe lo que siento':
