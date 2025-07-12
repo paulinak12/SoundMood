@@ -1,26 +1,13 @@
 # Importamos las librerías necesarias para el proyecto
-import streamlit as st  # para crear la interfaz web interactiva
-import pandas as pd  # para poder trabajar con la base de datos en Excel
-import requests  # para obtener imágenes desde enlaces externos
-
-# Para generar un resumen automático de la letra de la canción
-from sumy.parsers.plaintext import PlaintextParser
-from sumy.nlp.tokenizers import Tokenizer
-from sumy.summarizers.lsa import LsaSummarizer
+import streamlit as st # para crear la interfaz web interactiva
+import pandas as pd #para poder trabajar con la base de datos en Excel
+import requests #para obtener imágenes desde enlaces externos
 
 # Cargamos nuestra base de datos desde un archivo Excel previamente trabajado
 df = pd.read_excel('base2.xlsx')
 
 # Nos aseguramos de que la columna del año esté en formato numérico para poder filtrarla luego
 df['año_exacto'] = pd.to_numeric(df['año_exacto'], errors='coerce')
-
-# -------------------- FUNCIÓN PARA RESUMIR LA LETRA --------------------
-# Creamos una función que resume automáticamente la letra de una canción en 3 frases
-def resumir_letra(texto, oraciones=3):
-    parser = PlaintextParser.from_string(texto, Tokenizer("spanish"))
-    resumen = LsaSummarizer()
-    frases_resumen = resumen(parser.document, oraciones)
-    return ' '.join(str(oracion) for oracion in frases_resumen)
 
 # -------------------- MENÚ DE PÁGINAS --------------------
 # Definimos las dos secciones principales de la página: presentación y encuesta
@@ -124,7 +111,7 @@ else:
             with col1:
                 # Mostramos los datos básicos de la canción
                 st.write(f"🎶 Nombre: {cancion['nombre_cancion']}")
-                st.write(f"📅 Año: {int(cancion['año_exacto'])}")
+                st.write(f"📅 Año: {int(cancion['año_exacto'])}")  # Mostramos el año exacto
                 st.write(f"⌚ Duración: {cancion['duracion_exacta']}")
                 st.write(f"🎸 Género: {cancion['genero']}")
                 st.write(f"👤 Artista: {cancion['nombre_artista']}")
@@ -142,11 +129,8 @@ else:
                         """,
                         unsafe_allow_html=True
                     )
-
-                # Generamos y mostramos un resumen automático de la letra usando sumy
-                resumen = resumir_letra(cancion['letra_cancion'])
-                st.markdown("🧠 **Resumen automático de la letra:**")
-                st.markdown(f"<div style='font-size: 14px; line-height: 1.6; text-align: justify;'>{resumen}</div>", unsafe_allow_html=True)
+                # Incluimos una breve descripción informativa
+                st.write(f"ℹ️ Info: {cancion['info_cancion']}")
 
             with col2:
                 # En la segunda columna agregamos los enlaces y la letra
