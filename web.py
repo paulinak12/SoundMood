@@ -140,12 +140,13 @@ else:
                     unsafe_allow_html=True
                 )
 
-            # Botón para reiniciar todo
-            if st.button("🔁 Buscar otra canción / Limpiar selección"):
-                for key in ['emocion', 'proposito', 'duracion', 'idioma', 'epoca']:
-                    if key in st.session_state:
-                        del st.session_state[key]
-                st.experimental_rerun()
+        # Botón para reiniciar todo
+        if st.button("🔁 Buscar otra canción / Limpiar selección"):
+            for key in ['emocion', 'proposito', 'duracion', 'idioma', 'epoca']:
+                if key in st.session_state:
+                    del st.session_state[key]
+            st.success("¡Formulario reiniciado! Vuelve a seleccionar tus opciones.")
+            st.stop()  # Detiene la ejecución actual (no da error) en lugar de usar rerun
         else:
             st.warning("No se encontraron canciones para tu selección.")
     else:
