@@ -103,6 +103,7 @@ else:
             elif proposito == 'Que mejore mi estado de ánimo':
                 resultado = resultado[resultado['proposito'].str.lower().str.strip().str.contains('mejorar')]
 
+
         # Mostrar la canción recomendada si existe
         if not resultado.empty:
             cancion = resultado.sample(1).iloc[0]
