@@ -1,23 +1,25 @@
-import streamlit as st
-import pandas as pd
-from PIL import Image
-import requests
-from io import BytesIO
+# Importamos las librerías necesarias para el proyecto
+import streamlit as st # para crear la interfaz web interactiva
+import pandas as pd #para poder trabajar con la base de datos en Excel
+import requests #para obtener imágenes desde enlaces externos
 
-# Cargar archivo de Excel
+# Cargamos nuestra base de datos desde un archivo Excel previamente trabajado
 df = pd.read_excel('base2.xlsx')
 
-# Asegurar que la columna de año sea numérica
+# Nos aseguramos de que la columna del año esté en formato numérico para poder filtrarla luego
 df['año_exacto'] = pd.to_numeric(df['año_exacto'], errors='coerce')
 
 # -------------------- MENÚ DE PÁGINAS --------------------
+# Definimos las dos secciones principales de la página: presentación y encuesta
 paginas = ['Presentación', 'Encuesta']
 pagina_seleccionada = st.sidebar.selectbox('Selecciona una página', paginas)
 
 # -------------------- PÁGINA DE PRESENTACIÓN --------------------
 if pagina_seleccionada == 'Presentación':
+    # Título centrado con HTML
     st.markdown("<h1 style='text-align: center;'>SOUNDMOOD</h1>", unsafe_allow_html=True)
 
+    # Este es el texto de presentación que redactamos para explicar el propósito del proyecto
     texto = """
     ¡Hola! Somos Paulina Kosaka, Marcela Ismodes y Malena Aldazabal. Queremos darte la bienvenida a nuestra página. A continuación, te presentamos más información sobre el proyecto.
 
@@ -40,24 +42,25 @@ SoundMood nace para resolver ese problema, ofreciendo una plataforma sencilla pe
 - Te da control total sobre el tipo de música que quieres descubrir  
 - Enriquece tu experiencia al darte contexto e información sobre lo que estás escuchando
     """
+    # Usamos HTML para alinear el texto y controlar su tamaño
     st.markdown(f"<div style='text-align: justify; font-size: 15px;'>{texto}</div>", unsafe_allow_html=True)
 
 # -------------------- PÁGINA DE ENCUESTA --------------------
 else:
-    # Pregunta 1: Emoción
+    # Pregunta 1: Selección de emoción (trabajamos con una lista predefinida)
     emociones = ['Selecciona una opción', 'Alegre', 'Relajado', 'Romántico', 'Divertido', 'Motivado', 'Triste', 'Estresado/ansioso', 'Molesto']
     emocion = st.selectbox("Selecciona cómo te sientes hoy (Emoción):", emociones, key="emocion")
     if emocion == 'Selecciona una opción':
         emocion = None
 
-    # Pregunta 2: Propósito (solo si la emoción es negativa)
+    # Pregunta 2: Solo si la emoción es negativa, preguntamos por el propósito de la canción
     proposito = ''
     if emocion in ['Triste', 'Estresado/ansioso', 'Molesto']:
         proposito = st.radio("¿Qué buscas en la canción?", 
                              ['Que acompañe lo que siento', 'Que mejore mi estado de ánimo'],
                              index=0, key="proposito")
 
-    # Pregunta 3: Duración
+    # Pregunta 3: Duración (corta o larga)
     opciones_duracion = df['duracion'].dropna().unique()
     duracion_elegida = st.selectbox("¿Prefieres una canción corta o larga?", ['Selecciona una opción'] + list(opciones_duracion), key="duracion")
     if duracion_elegida == 'Selecciona una opción':
@@ -73,13 +76,16 @@ else:
     if epoca == 'Selecciona una opción':
         epoca = None
 
-    # -------------------- LÓGICA DE RECOMENDACIÓN --------------------
+    # -------------------- FILTRADO Y LÓGICA --------------------
+    # Si el usuario completó todas las opciones, filtramos la base
     if emocion and duracion_elegida and idioma and epoca:
+        # Clasificamos si la canción es de antes o después del 2010
         if epoca.lower() == 'hasta 2010':
             condicion_epoca = df['año_exacto'] <= 2010
         else:
             condicion_epoca = df['año_exacto'] >= 2011
 
+        # Filtramos según todas las condiciones
         resultado = df[
             (df['emocion'].str.lower() == emocion.lower()) &
             (df['duracion'].str.lower() == duracion_elegida.lower()) &
@@ -87,6 +93,7 @@ else:
             condicion_epoca
         ]
 
+        # Si es emoción negativa, filtramos por propósito (esto lo discutimos en grupo)
         if emocion.lower() in ['triste', 'estresado/ansioso', 'molesto']:
             resultado['proposito'] = resultado['proposito'].str.lower().str.strip()
             if proposito == 'Que acompañe lo que siento':
@@ -99,14 +106,18 @@ else:
             cancion = resultado.sample(1).iloc[0]
             st.subheader("🎶 Información de la canción recomendada 🎶")
 
+            # Usamos dos columnas para dividir la información: fue una decisión para mejorar la visualización
             col1, col2 = st.columns([1, 1])
             with col1:
+                # Mostramos los datos básicos de la canción
                 st.write(f"🎶 Nombre: {cancion['nombre_cancion']}")
+                st.write(f"📅 Año: {int(cancion['año_exacto'])}")  # Mostramos el año exacto
                 st.write(f"⌚ Duración: {cancion['duracion_exacta']}")
                 st.write(f"🎸 Género: {cancion['genero']}")
                 st.write(f"👤 Artista: {cancion['nombre_artista']}")
                 st.write(f"📲 Red Social: {cancion['red_social']} ({cancion['link_red_social']})")
 
+                # Agregamos la imagen del artista, siempre y cuando sea válida
                 foto = cancion['foto_artista']
                 if isinstance(foto, str) and (foto.lower().endswith('.jpg') or foto.lower().endswith('.png')):
                     st.markdown(
@@ -118,12 +129,15 @@ else:
                         """,
                         unsafe_allow_html=True
                     )
+                # Incluimos una breve descripción informativa
                 st.write(f"ℹ️ Info: {cancion['info_cancion']}")
 
             with col2:
+                # En la segunda columna agregamos los enlaces y la letra
                 st.write("🌐 Escúchala o mira el video oficial:")
                 st.markdown(f"[Spotify]({cancion['url_spotify']})  |  [Video]({cancion['url_video']})")
 
+                # Formateamos los versos de la letra para que no se vean desordenados
                 st.markdown("📝 **Letra:**")
                 letra = cancion['letra_cancion'].replace('\n', '<br>')
                 st.markdown(
@@ -138,4 +152,3 @@ else:
             st.warning("No se encontraron canciones para tu selección.")
     else:
         st.info("Por favor selecciona todas las opciones para obtener una recomendación.")
-
