@@ -7,6 +7,14 @@ from io import BytesIO
 # Cargar el archivo Excel
 df = pd.read_excel('base2.xlsx')
 
+# Mostrar los valores únicos de la columna 'proposito'
+with st.expander("🔍 Ver valores únicos de 'proposito' en la base de datos"):
+    st.write(df['proposito'].dropna().unique())
+
+# Asegurarse de que la columna 'año_exacto' sea numérica
+df['año_exacto'] = pd.to_numeric(df['año_exacto'], errors='coerce')  # Convertir 'año_exacto' a numérico, ignorando errores
+
+
 # Asegurarse de que la columna 'año_exacto' sea numérica
 df['año_exacto'] = pd.to_numeric(df['año_exacto'], errors='coerce')  # Convertir 'año_exacto' a numérico, ignorando errores
 
