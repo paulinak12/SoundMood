@@ -140,7 +140,7 @@ else:
                 st.write(f"ℹ️ Info: {cancion['info_cancion']}")
 
                 # Nube de palabras: esto lo agregamos para reconocer visualmente los temas presentes en la letra
-                st.markdown("☁️ **Temas más destacados en la letra:**")
+                st.markdown("☁️ Lo más destacado de la letra:")
                 texto = str(cancion['letra_cancion']).lower()
                 stop_words = set(stopwords.words('english')).union(set(stopwords.words('spanish')))
                 wordcloud = WordCloud(stopwords=stop_words,
