@@ -23,7 +23,7 @@ if pagina_seleccionada == 'Presentación':
     st.markdown("<h1 style='text-align: center;'>SOUNDMOOD</h1>", unsafe_allow_html=True)
     
     texto = """
-¡Hola! Somos Paulina Kosaka, Marcela Ismodes y Malena Aldazabal. Queremos darte la bienvenida a nuestra página. A continuación, te presentamos más información sobre el proyecto.
+    ¡Hola! Somos Paulina Kosaka, Marcela Ismodes y Malena Aldazabal. Queremos darte la bienvenida a nuestra página. A continuación, te presentamos más información sobre el proyecto.
     
 🎧 **SoundMood**: Tu estado de ánimo tiene sonido. ¿Qué es SoundMood?
     
@@ -37,11 +37,11 @@ __¿Por qué creamos SoundMood?__
     
 La música siempre ha sido una herramienta poderosa para conectar con las emociones humanas. Todos hemos buscado canciones cuando estamos tristes, queremos motivarnos o simplemente relajarnos. Sin embargo, no siempre sabemos qué escuchar o no encontramos algo que realmente encaje con cómo nos sentimos.
     
-SoundMood nace para resolver ese problema, ofreciendo una plataforma sencilla pero efectiva que:
+SoundMood nace para resolver ese problema, ofreciendo una plataforma sencilla, pero efectiva que:
     
 - Comprende lo que sientes
 - Te recomienda música acorde a ese sentimiento
-- Te da control total sobre el tipo de música que quieres descubrir
+- Te da control sobre el tipo de música que quieres descubrir
 - Enriquece tu experiencia al darte contexto e información sobre lo que estás escuchando
     """
     
