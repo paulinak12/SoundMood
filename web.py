@@ -110,39 +110,41 @@ else:
                 resultado = resultado[resultado['proposito'] == 'mejorar']
 
 
-        # Mostrar la canción recomendada si existe
-        if not resultado.empty:
-            cancion = resultado.sample(1).iloc[0]
-            
-            # Mostrar la información de la canción
-            st.subheader("🎶 Información de la canción recomendada 🎶")
+    # Mostrar la canción recomendada si existe
+    if not resultado.empty:
+        cancion = resultado.sample(1).iloc[0]
+        st.subheader("🎶 Información de la canción recomendada 🎶")
+
+        # Crear dos columnas para organizar mejor la información
+        col1, col2 = st.columns(2)
+
+        # 📄 Columna izquierda: info general e imagen
+        with col1:
             st.write(f"🎶 Nombre: {cancion['nombre_cancion']}")
             st.write(f"⌚ Duración: {cancion['duracion_exacta']}")
             st.write(f"🎸 Género: {cancion['genero']}")
             st.write(f"👤 Artista: {cancion['nombre_artista']}")
             st.write(f"📲 Red Social: {cancion['red_social']} ({cancion['link_red_social']})")
 
-            # Mostrar imagen del artista si está disponible
-            # Obtener la URL de la imagen del artista desde la base de datos
+            # Imagen del artista centrada y con tamaño reducido
             foto = cancion['foto_artista']
-
-            # Verificar que el valor en 'foto_artista' sea una cadena (str) y que termine en .jpg o .png
             if isinstance(foto, str) and (foto.lower().endswith('.jpg') or foto.lower().endswith('.png')):
-    
-            # Usar HTML incrustado para centrar la imagen y mostrar un texto debajo (caption)
                 st.markdown(
                     f"""
-                    <div style="text-align: center;">  <!-- Centra todo el contenido dentro del div -->
-                        <img src="{foto}" alt="Imagen de {cancion['nombre_artista']}" width="200" style="border-radius: 10px;"> <!-- Muestra la imagen con ancho reducido y bordes redondeados -->
-                        <p style="font-size: 14px; color: #555;">Imagen de {cancion['nombre_artista']}</p> <!-- Texto debajo de la imagen, en gris claro -->
+                    <div style="text-align: center;">
+                        <img src="{foto}" alt="Imagen de {cancion['nombre_artista']}" width="200" style="border-radius: 10px;">
+                        <p style="font-size: 14px; color: #555;">Imagen de {cancion['nombre_artista']}</p>
                     </div>
                     """,
-                    unsafe_allow_html=True  # Permite renderizar HTML dentro de Streamlit
+                    unsafe_allow_html=True
                 )
-
-            # Mostrar más detalles
+        
             st.write(f"ℹ️ Info: {cancion['info_cancion']}")
-            st.write(f"🌐 Escuchála y mira el video oficial en: [Spotify]({cancion['url_spotify']})  |  [Video]({cancion['url_video']})")
+
+        # 🎵 Columna derecha: enlaces y letra
+        with col2:
+            st.write("🌐 Escúchala o mira el video oficial:")
+            st.markdown(f"[Spotify]({cancion['url_spotify']})  |  [Video]({cancion['url_video']})")
             st.write("📝 Letra:")
             # Mostrar la letra de la canción tal como está, respetando saltos de línea y espacios
             st.text(cancion['letra_cancion'])
