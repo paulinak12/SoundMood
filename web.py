@@ -50,7 +50,7 @@ SoundMood nace para resolver ese problema, ofreciendo una plataforma sencilla pe
 # Página de Encuesta
 else: 
     # Selección de emociones con la opción "Selecciona una opción"
-    emociones = ['Selecciona una opción', 'alegre', 'triste', 'relajado', 'romántico', 'divertido', 'motivado', 'estresado/ansioso', 'molesto']
+    emociones = ['Selecciona una opción', 'Alegre', 'Relajado', 'Romántico', 'Divertido', 'Motivado', 'Triste', 'Estresado/ansioso', 'Molesto']
     emocion = st.selectbox("Selecciona cómo te sientes hoy (Emoción):", emociones)
 
     # Verifica si se ha seleccionado una emoción válida
@@ -59,7 +59,7 @@ else:
 
     # Propósito de la canción solo para emociones específicas (triste, estresado/ansioso, molesto)
     proposito = ''
-    if emocion in ['triste', 'estresado/ansioso', 'molesto']:
+    if emocion in ['Triste', 'Estresado/ansioso', 'Molesto']:
         # Aquí utilizamos un radio button para seleccionar el propósito de la canción
         proposito = st.radio("¿Qué buscas en la canción?", 
                              ['Que acompañe lo que siento', 'Que mejore mi estado de ánimo'],
@@ -117,8 +117,10 @@ else:
             # Mostrar la información de la canción
             st.subheader("🎶 Información de la canción recomendada 🎶")
             st.write(f"🎶 Nombre: {cancion['nombre_cancion']}")
-            st.write(f"👤 Artista: {cancion['nombre_artista']}")
+            st.write(f"⌚ Duración: {cancion['duracion_exacta']}")
             st.write(f"🎸 Género: {cancion['genero']}")
+            st.write(f"👤 Artista: {cancion['nombre_artista']}")
+            st.write(f"📲 Red Social: {cancion['red_social']} ({cancion['link_red_social']})")
 
             # Mostrar imagen del artista si está disponible
             # Obtener la URL de la imagen del artista desde la base de datos
@@ -139,9 +141,12 @@ else:
                 )
 
             # Mostrar más detalles
-            st.write(f"📲 Red Social: {cancion['red_social']} ({cancion['link_red_social']})")
-            st.write(f"📝 Letra:\n{cancion['letra_cancion']}")
             st.write(f"ℹ️ Info: {cancion['info_cancion']}")
+            # Mostrar título de sección
+            st.subheader("📝 Letra:")
+
+            # Mostrar la letra de la canción tal como está, respetando saltos de línea y espacios
+            st.text(cancion['letra_cancion'])
             st.write(f"🌐 [Spotify]({cancion['url_spotify']})  |  [Video]({cancion['url_video']})")
         else:
             st.write("No se encontraron canciones para tu selección.")
