@@ -99,10 +99,9 @@ else:
         # Si se seleccionó un propósito específico, filtrar también por ese propósito
         if emocion in ['triste', 'estresado/ansioso', 'molesto']:
             if proposito == 'Que acompañe lo que siento':
-                resultado = resultado[resultado['proposito'].str.lower().str.strip().str.contains('acompañar')]
+                resultado = resultado[resultado['proposito'].str.lower().str.strip().str.contains('Acompañar')]
             elif proposito == 'Que mejore mi estado de ánimo':
-                resultado = resultado[resultado['proposito'].str.lower().str.strip().str.contains('mejorar')]
-
+                resultado = resultado[resultado['proposito'].str.lower().str.strip().str.contains('Mejorar')]
 
         # Mostrar la canción recomendada si existe
         if not resultado.empty:
