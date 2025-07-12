@@ -99,7 +99,7 @@ else:
             cancion = resultado.sample(1).iloc[0]
             st.subheader("🎶 Información de la canción recomendada 🎶")
 
-            col1, col2 = st.columns([2, 3])
+            col1, col2 = st.columns([1, 1])
             with col1:
                 st.write(f"🎶 Nombre: {cancion['nombre_cancion']}")
                 st.write(f"⌚ Duración: {cancion['duracion_exacta']}")
@@ -125,10 +125,11 @@ else:
                 st.markdown(f"[Spotify]({cancion['url_spotify']})  |  [Video]({cancion['url_video']})")
 
                 st.markdown("📝 **Letra:**")
+                letra = cancion['letra_cancion'].replace('\n', '<br>')
                 st.markdown(
                     f"""
-                    <div style="overflow-x: auto;">
-                        <pre style="font-size: 14px; line-height: 1.5;">{cancion['letra_cancion']}</pre>
+                    <div style="font-size: 14px; line-height: 1.6; text-align: left;">
+                        {letra}
                     </div>
                     """,
                     unsafe_allow_html=True
