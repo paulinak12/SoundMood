@@ -10,17 +10,6 @@ df = pd.read_excel('base2.xlsx')
 # Asegurar que la columna de año sea numérica
 df['año_exacto'] = pd.to_numeric(df['año_exacto'], errors='coerce')
 
-# -------------------- CONTROL DE REINICIO --------------------
-if 'reset_requested' not in st.session_state:
-    st.session_state.reset_requested = False
-
-if st.session_state.reset_requested:
-    for key in ['emocion', 'proposito', 'duracion', 'idioma', 'epoca']:
-        if key in st.session_state:
-            del st.session_state[key]
-    st.session_state.reset_requested = False
-    st.experimental_rerun()
-
 # -------------------- MENÚ DE PÁGINAS --------------------
 paginas = ['Presentación', 'Encuesta']
 pagina_seleccionada = st.sidebar.selectbox('Selecciona una página', paginas)
@@ -144,11 +133,6 @@ else:
                     """,
                     unsafe_allow_html=True
                 )
-
-            # -------------------- BOTÓN PARA REINICIAR --------------------
-            if st.button("🔁 Buscar otra canción / Limpiar selección"):
-                st.session_state.reset_requested = True
-                st.experimental_rerun()
         else:
             st.warning("No se encontraron canciones para tu selección.")
     else:
