@@ -142,9 +142,7 @@ else:
 
             # Mostrar más detalles
             st.write(f"ℹ️ Info: {cancion['info_cancion']}")
-            # Mostrar título de sección
-            st.subheader("📝 Letra:")
-
+            st.write("📝 Letra:")
             # Mostrar la letra de la canción tal como está, respetando saltos de línea y espacios
             st.text(cancion['letra_cancion'])
             st.write(f"🌐 [Spotify]({cancion['url_spotify']})  |  [Video]({cancion['url_video']})")
