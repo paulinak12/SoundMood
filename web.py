@@ -123,7 +123,7 @@ else:
             # Mostrar imagen del artista si está disponible
             foto = cancion['foto_artista']
             if isinstance(foto, str) and (foto.lower().endswith('.jpg') or foto.lower().endswith('.png')):
-                st.image(foto, caption=f"Imagen de {cancion['nombre_artista']}", use_container_width=True)
+              st.image(foto, caption=f"Imagen de {cancion['nombre_artista']}", width=200)
 
             # Mostrar más detalles
             st.write(f"📲 Red Social: {cancion['red_social']} ({cancion['link_red_social']})")
