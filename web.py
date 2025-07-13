@@ -18,7 +18,6 @@ pagina_seleccionada = st.sidebar.selectbox('Selecciona una página', paginas)
 if pagina_seleccionada == 'Presentación':
     # Título centrado con HTML
     st.markdown("<h1 style='text-align: center;'>SOUNDMOOD</h1>", unsafe_allow_html=True)
-    # Mostramos una imagen ilustrativa centrada justo debajo del título
 
     # Este es el texto de presentación que redactamos para explicar el propósito del proyecto
     texto = """
@@ -32,15 +31,6 @@ Pero vamos más allá de una simple recomendación musical: personalizamos la ex
 
 Además, para enriquecer la experiencia musical, SoundMood también ofrece información detallada sobre el artista y la canción, permitiendo así que el usuario no solo escuche música, sino que también descubra y aprenda sobre lo que está escuchando.
 
-st.markdown(
-    """
-    <div style='text-align: center; margin-top: 20px;'>
-        <img src="https://8b0b893f25.cbaul-cdnwnd.com/5dd570d4033bedf9e45dd6d8b0914db6/200000002-44ead44eaf/musica_y_cerebro_02-2000x1402-removebg-preview.png?ph=8b0b893f25" 
-        alt="Música y cerebro" width="350">
-    </div>
-    """,
-    unsafe_allow_html=True
-)
 __¿Por qué creamos SoundMood?__
 
 La música siempre ha sido una herramienta poderosa para conectar con las emociones humanas. Todos hemos buscado canciones cuando estamos tristes, queremos motivarnos o simplemente relajarnos. Sin embargo, no siempre sabemos qué escuchar o no encontramos algo que realmente encaje con cómo nos sentimos.
@@ -162,4 +152,3 @@ else:
             st.warning("No se encontraron canciones para tu selección.")
     else:
         st.info("Por favor selecciona todas las opciones para obtener una recomendación.")
-
