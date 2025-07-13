@@ -145,11 +145,11 @@ else:
                         """,
                         unsafe_allow_html=True
                     )
-                # Incluimos una breve descripción informativa
+                # Incluimos una breve descripción informativa que tenemos en la BD
                 st.write(f"ℹ️ Info: {cancion['info_cancion']}")
 
-                # ☁️ Nube de palabras: esto lo agregamos para reconocer visualmente los temas presentes en la letra
-                st.markdown("☁️ **Temas más destacados en la letra:**")
+                #Nube de palabras: esto lo agregamos para reconocer visualmente los temas presentes en la letra
+                st.markdown("☁️ Las palabras más destacadas de la canción:")
                 texto = str(cancion['letra_cancion']).lower()
                 stop_words = set(stopwords.words('english')).union(set(stopwords.words('spanish')))
                 wordcloud = WordCloud(stopwords=stop_words,
