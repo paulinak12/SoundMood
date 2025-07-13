@@ -18,7 +18,16 @@ pagina_seleccionada = st.sidebar.selectbox('Selecciona una página', paginas)
 if pagina_seleccionada == 'Presentación':
     # Título centrado con HTML
     st.markdown("<h1 style='text-align: center;'>SOUNDMOOD</h1>", unsafe_allow_html=True)
-
+    # Mostramos una imagen ilustrativa centrada justo debajo del título
+    st.markdown(
+        """
+        <div style='text-align: center; margin-top: 20px;'>
+            <img src="https://8b0b893f25.cbaul-cdnwnd.com/5dd570d4033bedf9e45dd6d8b0914db6/200000002-44ead44eaf/musica_y_cerebro_02-2000x1402-removebg-preview.png?ph=8b0b893f25" 
+            alt="Música y cerebro" width="350">
+        </div>
+        """,
+        unsafe_allow_html=True
+    )
     # Este es el texto de presentación que redactamos para explicar el propósito del proyecto
     texto = """
     ¡Hola! Somos Paulina Kosaka, Marcela Ismodes y Malena Aldazabal. Queremos darte la bienvenida a nuestra página. A continuación, te presentamos más información sobre el proyecto.
