@@ -3,6 +3,13 @@ import streamlit as st # para crear la interfaz web interactiva
 import pandas as pd #para poder trabajar con la base de datos en Excel
 import requests #para obtener imágenes desde enlaces externos
 
+# Estas librerías las agregamos para generar la nube de palabras
+from wordcloud import WordCloud, STOPWORDS
+import matplotlib.pyplot as plt
+import nltk
+nltk.download('stopwords')
+from nltk.corpus import stopwords
+
 # Cargamos nuestra base de datos desde un archivo Excel previamente trabajado
 df = pd.read_excel('base2.xlsx')
 
@@ -23,7 +30,7 @@ if pagina_seleccionada == 'Presentación':
         """
         <div style='text-align: center; margin-top: 20px;'>
             <img src="https://8b0b893f25.cbaul-cdnwnd.com/5dd570d4033bedf9e45dd6d8b0914db6/200000002-44ead44eaf/musica_y_cerebro_02-2000x1402-removebg-preview.png?ph=8b0b893f25" 
-            alt="Música y cerebro" width="300">
+            alt="Música y cerebro" width="350">
         </div>
         """,
         unsafe_allow_html=True
@@ -140,6 +147,20 @@ else:
                     )
                 # Incluimos una breve descripción informativa
                 st.write(f"ℹ️ Info: {cancion['info_cancion']}")
+
+                # ☁️ Nube de palabras: esto lo agregamos para reconocer visualmente los temas presentes en la letra
+                st.markdown("☁️ **Temas más destacados en la letra:**")
+                texto = str(cancion['letra_cancion']).lower()
+                stop_words = set(stopwords.words('english')).union(set(stopwords.words('spanish')))
+                wordcloud = WordCloud(stopwords=stop_words,
+                                      background_color='white',
+                                      width=400,
+                                      height=300,
+                                      colormap='plasma').generate(texto)
+                fig, ax = plt.subplots()
+                ax.imshow(wordcloud, interpolation='bilinear')
+                ax.axis("off")
+                st.pyplot(fig)
 
             with col2:
                 # En la segunda columna agregamos los enlaces y la letra
